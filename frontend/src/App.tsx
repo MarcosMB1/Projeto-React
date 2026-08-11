@@ -1,28 +1,26 @@
+import { Link, Routes, Route } from "react-router";
+
 import "./App.css";
-import Botao from "./components/botao";
+import Home from "./pages/Home";
+import Produtos from "./pages/Produtos";
+import Contato from "./pages/Contatos";
 
 function App() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#252525]">
-      <div className="rounded-xl bg-white p-5 shadow-lg">
-        <h1 className="text-center text-5xl font-bold text-cyan-600">
-          Hello, World!!!
-        </h1>
-        <p className="mt-3 text-center text-cyan-400">
-          Bem vindo ao meu React com Tailwind CSS!
-        </p>
-        <div className="mt-5 flex justify-center gap-2">
-          <Botao
-            texto="Comprar"
-            cor="bg-cyan-800"
-            corHover="hover:bg-cyan-600"
-          ></Botao>
-          <Botao
-            texto="Vender"
-            cor="bg-red-800"
-            corHover="hover:bg-red-600"
-          ></Botao>
-        </div>
+    <main className="min-h-screen bg-slate-300">
+      <nav className="flex gap-6 bg-blue-900 p-4 text-white">
+        <Link to={"/"} className="hover:underline">
+          Home
+        </Link>
+        <Link to="/produtos">Produtos</Link>
+        <Link to="/contato">Contato</Link>
+      </nav>
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/produtos" element={<Produtos />} />
+          <Route path="/contato" element={<Contato />} />
+        </Routes>
       </div>
     </main>
   );
