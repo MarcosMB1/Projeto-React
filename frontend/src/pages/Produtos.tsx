@@ -47,6 +47,7 @@ function Produtos() {
       }),
     });
     const novoUsuario = await resposta.json();
+    console.log(novoUsuario);
     setUsuarios([...usuarios, novoUsuario]);
     setName("");
     setEmail("");
@@ -80,20 +81,39 @@ function Produtos() {
     setEmail("");
   } */
 
-  function salvarEdicao() {
-    const resposta = await fetch(`https://jsonplaceholder.typicode.com/users`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-      }),
-    });
+  async function salvarEdicao() {
+    const resposta = await fetch(
+      `https://jsonplaceholder.typicode.com/users?${edicao}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+        }),
+      },
+    );
+    const usuarioAtualizado = await resposta.json();
+    setUsuarios(
+      usuarios.map((usuario) =>
+        usuario.id === edicao ? usuarioAtualizado : usuario,
+      ),
+    );
+    setEdicao(null);
+    setName("");
+    setEmail("");
   }
 
-  function deletarUsuarios(id: number) {
+  /* function deletarUsuarios(id: number) {
     const usuariosAtualizados = usuarios.filter((usuario) => usuario.id !== id);
     setUsuarios(usuariosAtualizados);
+  } */
+
+  async function deletarUsuarios(id: number) {
+    await fetch(`https://jsonplaceholder.typicode.com/users?${id}`, {
+      method: "DELETE",
+    });
+    setUsuarios(usuarios.filter((usuario) => usuario.id !== id));
   }
 
   return (
