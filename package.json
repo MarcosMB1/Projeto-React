@@ -1,5 +1,9 @@
 {
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "prettier-plugin-tailwindcss": "^0.8.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.6"
   }
 }

@@ -1,22 +1,24 @@
-    import express, { type Express, type Request, type Response } from 'express';
+import express, { type Express, type Request, type Response } from 'express';
+import cors from 'cors';
 
-    const app: Express = express();
-    const port = 3000;
+const app: Express = express();
+app.use(cors());
+const port = 3000;
 
-    const contatos = [
-        {id: 1, nome: "Marcos", email: "Sim@teste.com"},
-        {id: 2, nome: "Marlon", email: "Mirlon20@teste.com"},
-        {id: 3, nome: "Mauro", email: "MeuNomeMauro23@teste.com"},
-    ]
+const contatos = [
+    { id: 1, name: "Mauro", email: "canivete@teste.com"},
+    { id: 2, name: "Samuel", email: "samuelemauro@teste.com"},
+    { id: 3, name: "Gu", email: "passeio@teste.com"}
+];
 
-    app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World!');
-    });
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+});
 
-    app.get('/api/contatos',(req: Request, res: Response) => {
-      res.json(contatos);
-    });
+app.get('/api/contatos', (req: Request, res: Response) => {
+  res.json(contatos);
+});
 
-    app.listen(port, () => {
-    console.log(`Servidor Iniciado em: http//localhost:${port}`);
-    });
+app.listen(port, () => {
+  console.log(`Servidor iniciado em: http://localhost:${port}`);
+});
