@@ -6,7 +6,8 @@ type Contato = {
   email: string;
 };
 
-const API_URL = "http://localhost:3000/api/contatos";
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:3000/api/contatos";
 
 export default function Contatos() {
   const [contatos, setContatos] = useState<Contato[]>([]);
@@ -78,12 +79,7 @@ export default function Contatos() {
 
       await buscarContatos();
 
-      setForm({
-        id: 0,
-        name: "",
-        email: "",
-      });
-
+      cancelarEdicao();
     } catch (error) {
       const mensagem =
         error instanceof Error ? error.message : "Erro inesperado";
@@ -113,7 +109,6 @@ export default function Contatos() {
       await buscarContatos();
 
       cancelarEdicao();
-
     } catch (error) {
       const mensagem =
         error instanceof Error ? error.message : "Erro inesperado";
@@ -131,13 +126,13 @@ export default function Contatos() {
     setErro("");
   }
 
-  function cancelarEdicao(){
+  function cancelarEdicao() {
     setForm({
-        id: 0,
-        name: "",
-        email: "",
-      });
-      setEditando(false);
+      id: 0,
+      name: "",
+      email: "",
+    });
+    setEditando(false);
   }
 
   useEffect(() => {
@@ -224,7 +219,7 @@ export default function Contatos() {
         <div className="flex gap-2">
           <button
             type="submit"
-            className={`rounded-lg px-5 py-2 text-white ${
+            className={`cursor-pointer rounded-lg px-5 py-2 text-white ${
               editando
                 ? "bg-green-500 hover:bg-green-700"
                 : "bg-blue-500 hover:bg-blue-700"
@@ -235,8 +230,8 @@ export default function Contatos() {
           {editando && (
             <button
               type="button"
-              //onClick={cancelarEdicao}
-              className="rounded-lg bg-gray-500 px-5 py-2 text-white hover:bg-gray-600"
+              onClick={cancelarEdicao}
+              className="cursor-pointer rounded-lg bg-gray-500 px-5 py-2 text-white hover:bg-gray-600"
             >
               Cancelar
             </button>
