@@ -9,9 +9,7 @@ import { prisma } from "./lib/prisma.js";
 
 const app: Express = express();
 
-app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:5173",
-}));
+app.use(cors({ origin: true }));
 
 app.use(express.json());
 
